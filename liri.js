@@ -2,14 +2,27 @@ require("dotenv").config();
 
 const keys = require("./keys.js");
 
-var Spotify = require('node-spotify-api');
-var spotify = new Spotify(keys.spotify);
+const axios = require("axios");
 
-var userInput = process.argv[3];
+const moment = require("moment");
+
+const Spotify = require('node-spotify-api');
+const spotify = new Spotify(keys.spotify);
+
+const userInput = process.argv[3];
 
 if (process.argv[2] === "concert-this") {
 
-    console.log("concert-this called");
+    axios
+        .get("https://rest.bandsintown.com/artists/celine+dion/events?app_id=codingbootcamp")
+        .then(
+            function (resp) {
+                console.log(resp);
+            })
+        .catch(
+            function (err) {
+                console.error(err);
+            });
 
 } else if (process.argv[2] === "spotify-this-song") {
 
